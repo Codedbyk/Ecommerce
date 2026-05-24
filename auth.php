@@ -51,7 +51,7 @@ if(isset($_POST['register'])){
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Check email
+    // Check Email
     $check = $conn->prepare("SELECT id FROM users WHERE email=?");
     $check->bind_param("s", $email);
     $check->execute();
@@ -73,6 +73,7 @@ if(isset($_POST['register'])){
             $success = "Registration Successful! Please Login.";
 
         } else {
+
             $error = "Registration Failed!";
         }
     }
@@ -104,11 +105,42 @@ body{
 }
 
 .container{
-    width:400px;
+    width:900px;
+    display:flex;
     background:white;
-    padding:40px;
-    border-radius:15px;
+    border-radius:20px;
+    overflow:hidden;
     box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+/* LEFT SIDE */
+
+.left-side{
+    flex:1;
+    background:#ff5722;
+    color:white;
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.left-side h1{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.left-side p{
+    line-height:1.8;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+/* RIGHT SIDE */
+
+.right-side{
+    flex:1;
+    padding:40px;
 }
 
 h2{
@@ -185,54 +217,90 @@ input{
 
 <div class="container">
 
-    <div class="toggle-btns">
-        <button class="active" id="loginBtn" onclick="showLogin()">Login</button>
-        <button id="registerBtn" onclick="showRegister()">Register</button>
+    <!-- LEFT SIDE -->
+
+    <div class="left-side">
+
+        <h1>🛒 MyStore</h1>
+
+        <p>
+            Welcome to our Online Shopping Website
+            with Sales Analytics and Recommendation System.
+        </p>
+
+        <p>✔ Easy Shopping Experience</p>
+
+        <p>✔ Secure Login & Registration</p>
+
+        <p>✔ Add to Cart & Checkout</p>
+
+        <p>✔ Smart Product Recommendations</p>
+
     </div>
 
-    <?php
-    if(isset($error)){
-        echo "<p class='message'>$error</p>";
-    }
+    <!-- RIGHT SIDE -->
 
-    if(isset($success)){
-        echo "<p class='message success'>$success</p>";
-    }
-    ?>
+    <div class="right-side">
 
-    <!-- LOGIN FORM -->
+        <div class="toggle-btns">
 
-    <form method="POST" id="loginForm">
+            <button class="active" id="loginBtn" onclick="showLogin()">
+                Login
+            </button>
 
-        <h2>Login</h2>
+            <button id="registerBtn" onclick="showRegister()">
+                Register
+            </button>
 
-        <input type="email" name="email" placeholder="Enter Email" required>
+        </div>
 
-        <input type="password" name="password" placeholder="Enter Password" required>
+        <?php
 
-        <button type="submit" name="login" class="submit-btn">
-            Login
-        </button>
+        if(isset($error)){
+            echo "<p class='message'>$error</p>";
+        }
 
-    </form>
+        if(isset($success)){
+            echo "<p class='message success'>$success</p>";
+        }
 
-    <!-- REGISTER FORM -->
+        ?>
 
-    <form method="POST" id="registerForm">
+        <!-- LOGIN FORM -->
 
-        <h2>Register</h2>
+        <form method="POST" id="loginForm">
 
-        <input type="text" name="name" placeholder="Enter Name" required>
+            <h2>Login</h2>
 
-        <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
 
-        <input type="password" name="password" placeholder="Enter Password" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
 
-        <button type="submit" name="register" class="submit-btn">
-            Register
-        </button>
+            <button type="submit" name="login" class="submit-btn">
+                Login
+            </button>
 
-    </form>
+        </form>
+
+        <!-- REGISTER FORM -->
+
+        <form method="POST" id="registerForm">
+
+            <h2>Register</h2>
+
+            <input type="text" name="name" placeholder="Enter Name" required>
+
+            <input type="email" name="email" placeholder="Enter Email" required>
+
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <button type="submit" name="register" class="submit-btn">
+                Register
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
 
